@@ -3,6 +3,9 @@ const currentDate = document.querySelector(".current_date_date");
 const currentTime = document.querySelector(".current_date_time");
 const currentMonth = document.querySelector(".current_month_month");
 const currentyears = document.querySelector(".current_month_years");
+const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 
 currentDays.textContent = getCurrentDay();
 currentDate.textContent = getCurrentDate();
@@ -37,78 +40,13 @@ function getCurrentDate() {
 
 function getCurrentDay() {
   let currentDayNumber = new Date().getDay();
-  let result = "";
-
-  switch (currentDayNumber) {
-    case 0:
-      result = "Sun";
-      break;
-    case 1:
-      result = "Mon";
-      break;
-    case 2:
-      result = "Tue";
-      break;  
-    case 3:
-      result = "Wed";
-      break;  
-    case 4:
-      result = "Thu";
-      break;  
-    case 5:
-      result = "Fri";
-      break;  
-    case 6:
-      result = "Sat";
-      break;  
-  };
-  
+  let result = weekdays[currentDayNumber];
   return result;
 };
 
 function getCurrentMonth() {
   let currentMonthNumber = new Date().getMonth();
-  let result = "";
-
-  switch (currentMonthNumber) {
-    case 0:
-      result = "Jan";
-      break;
-    case 1:
-      result = "Feb";
-      break;
-    case 2:
-      result = "Mar";
-      break;  
-    case 3:
-      result = "Apr";
-      break;  
-    case 4:
-      result = "May";
-      break;  
-    case 5:
-      result = "Jun";
-      break;  
-    case 6:
-      result = "Jul";
-      break;  
-    case 7:
-      result = "Aug";
-      break;
-    case 8:
-      result = "Sep";
-      break;
-    case 9:
-      result = "Oct";
-      break;  
-    case 10:
-      result = "Nov";
-      break;  
-    case 11:
-      result = "Dec";
-      break;    
-  };
-  
+  let result = months[currentMonthNumber];
   return result;
 };
 
