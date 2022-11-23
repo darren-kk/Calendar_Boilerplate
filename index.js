@@ -5,7 +5,7 @@ const currentMonth = document.querySelector(".current_month_month");
 const currentyears = document.querySelector(".current_month_years");
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
+const datesRow = document.querySelectorAll(".calendar_main_dates")
 
 currentDays.textContent = getCurrentDay();
 currentDate.textContent = getCurrentDate();
@@ -54,3 +54,15 @@ function getCurrentYear() {
   let result = new Date().getFullYear();
   return result;
 };
+
+function getFirstDay() {
+  let firstDay = new Date("2022-11-1").getDay();
+  datesRow[firstDay].textContent = 1;
+  
+  for (let i = 2; i < 31; i++) {
+    firstDay = firstDay + 1
+    datesRow[firstDay].textContent = i
+  };
+}
+
+getFirstDay();
