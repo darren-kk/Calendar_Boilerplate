@@ -6,6 +6,12 @@ const currentyears = document.querySelector(".current_month_years");
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const datesRow = document.querySelectorAll(".calendar_main_dates")
+const btnRight = document.querySelector(".right");
+const btnleft = document.querySelector(".left");
+let nowMonth = new Date().getMonth() + 1
+let nowYear = getCurrentYear();
+let firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+
 
 currentDays.textContent = getCurrentDay();
 currentDate.textContent = getCurrentDate();
@@ -13,7 +19,8 @@ currentMonth.textContent = getCurrentMonth();
 currentyears.textContent = getCurrentYear();
 getCurrentTime();
 setInterval(getCurrentTime, 1000);
-
+datesRow[firstDay].textContent = 1;
+fillCalendar();
 
 
 function getCurrentTime() {
@@ -55,14 +62,60 @@ function getCurrentYear() {
   return result;
 };
 
-function getFirstDay() {
-  let firstDay = new Date("2022-11-1").getDay();
-  datesRow[firstDay].textContent = 1;
-  
+function fillCalendar() {
   for (let i = 2; i < 31; i++) {
     firstDay = firstDay + 1
     datesRow[firstDay].textContent = i
   };
 }
 
-getFirstDay();
+function add() {
+  for(let i = 0; i < datesRow.length; i ++) {
+    datesRow[i].textContent = "";
+  };
+  
+  nowMonth = nowMonth + 1
+  
+  if (nowMonth > 12) {
+    nowYear = nowYear + 1;
+    nowMonth = 1;
+    firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+  };
+  
+  firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+  datesRow[firstDay].textContent = 1;
+  
+  fillCalendar();
+  
+  currentMonth.textContent = months[new Date(`${nowYear}-${nowMonth}-1`).getMonth()];
+  currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
+  currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
+  currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+}
+
+function minus() {
+  for(let i = 0; i < datesRow.length; i ++) {
+    datesRow[i].textContent = "";
+  };
+
+  nowMonth = nowMonth - 1
+  
+  if (nowMonth < 1) {
+    nowYear = nowYear - 1;
+    nowMonth = 12;
+    firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+  };
+  
+  firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+  datesRow[firstDay].textContent = 1;
+  
+  fillCalendar();
+  
+  currentMonth.textContent = months[new Date(`${nowYear}-${nowMonth}-1`).getMonth()];
+  currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
+  currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
+  currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+}
+
+btnRight.addEventListener('click', add)
+btnleft.addEventListener('click', minus)
