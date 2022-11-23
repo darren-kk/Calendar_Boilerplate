@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <script src="https://kit.fontawesome.com/ea6501e7b4.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css?family=Pacifico&display=swap"
       rel="stylesheet"
@@ -24,19 +25,36 @@
       <h1>Calendar</h1>
 
       <!-- 달력 Start -->
-      <div class="current_date">요일과 날짜</div>
+      <div class="current_date">
+        <div class="current_date_days">요일</div>
+        <div class="current_date_date">날짜</div>
+        <div class="current_date_time">time</div>
+      </div>
 
-      <div class="current_month">월 과 년도</div>
+      <div class="current_month">
+        <div class="current_month_month">월</div>
+        <div class="current_month_years">년도</div>
+      </div>
 
       <div class="calendar">
-        <button class="calendar_btn>" type="button"></button>
+        <i class="fa-solid fa-angles-left fa-3x calendar_btn"></i>
         
-        <div class="calendar_main">
-          <div class="calendar_main_days"></div>
-          <div class="calendar_main_dates"></div>
-        </div>
+        <table class="calendar_main">
+          <th class="calendar_main_days">Sun</th>
+          <th class="calendar_main_days">Mon</th>
+          <th class="calendar_main_days">Tue</th>
+          <th class="calendar_main_days">Wed</th>
+          <th class="calendar_main_days">Thu</th>
+          <th class="calendar_main_days">Fri</th>
+          <th class="calendar_main_days">Sun</th>
+
+          <tr class="calendar_main_dates_firstrow">
+            <td class="calendar_main_dates">1</td>
+            <td class="calendar_main_dates">2</td>
+          </tr>
+        </table>
         
-        <button class="calendar_btn>" type="button"></button>
+        <i class="fa-solid fa-angles-right fa-3x calendar_btn"></i>
       </div>  
       <!-- 달력 End -->
     </section>

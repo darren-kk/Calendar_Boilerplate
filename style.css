@@ -10,3 +10,29 @@ h1 {
   text-align: center;
   font-size: 72px;
 }
+
+.current_date {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+}
+
+.current_month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  font-size: 25px;
+}
+
+.current_month_month {
+  margin-right: 20px;
+}
+
+.calendar_btn {
+  border: none;
+  width: 30px;
+  height: 30px;
+}
