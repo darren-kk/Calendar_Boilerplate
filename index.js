@@ -5,6 +5,7 @@ const currentMonth = document.querySelector(".current_month_month");
 const currentyears = document.querySelector(".current_month_years");
 const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const fullMonths = [1, 3, 5, 7, 8, 10, 12]
 const datesRow = document.querySelectorAll(".calendar_main_dates")
 const btnRight = document.querySelector(".right");
 const btnleft = document.querySelector(".left");
@@ -63,9 +64,21 @@ function getCurrentYear() {
 };
 
 function fillCalendar() {
-  for (let i = 2; i < 31; i++) {
-    firstDay = firstDay + 1
-    datesRow[firstDay].textContent = i
+  if (fullMonths.includes(nowMonth)) {
+    for (let i = 2; i < 32; i++) {
+      firstDay = firstDay + 1
+      datesRow[firstDay].textContent = i
+    };
+  } else if (nowMonth === 2){
+    for (let i = 2; i < 29; i++) {
+      firstDay = firstDay + 1
+      datesRow[firstDay].textContent = i
+    }; 
+  } else {
+    for (let i = 2; i < 31; i++) {
+      firstDay = firstDay + 1
+      datesRow[firstDay].textContent = i
+    };
   };
 }
 
@@ -125,5 +138,5 @@ function minus() {
   };
 }
 
-btnRight.addEventListener('click', add)
-btnleft.addEventListener('click', minus)
+btnRight.addEventListener('click', add);
+btnleft.addEventListener('click', minus);
