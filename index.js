@@ -7,6 +7,7 @@ const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 const fullMonths = [1, 3, 5, 7, 8, 10, 12]
 const datesRow = document.querySelectorAll(".calendar_main_dates")
+const table = document.querySelector(".calendar_main")
 const btnRight = document.querySelector(".right");
 const btnleft = document.querySelector(".left");
 let nowMonth = new Date().getMonth() + 1
@@ -138,5 +139,13 @@ function minus() {
   };
 }
 
+function clickDate(event) {
+  if (event.target.textContent) {
+    currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-${event.target.textContent}`).getDay()];
+    currentDate.textContent = new Date(`${nowYear}-${nowMonth}-${event.target.textContent}`).getDate();
+  }
+}
+
 btnRight.addEventListener('click', add);
 btnleft.addEventListener('click', minus);
+table.addEventListener('click', clickDate);
