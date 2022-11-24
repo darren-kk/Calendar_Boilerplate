@@ -79,7 +79,6 @@ function add() {
   if (nowMonth > 12) {
     nowYear = nowYear + 1;
     nowMonth = 1;
-    firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
   };
   
   firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
@@ -91,6 +90,11 @@ function add() {
   currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
   currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
   currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+  
+  if (nowMonth === new Date().getMonth() + 1) {
+    currentDays.textContent = getCurrentDay();
+    currentDate.textContent = getCurrentDate();
+  };
 }
 
 function minus() {
@@ -103,7 +107,6 @@ function minus() {
   if (nowMonth < 1) {
     nowYear = nowYear - 1;
     nowMonth = 12;
-    firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
   };
   
   firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
@@ -115,6 +118,11 @@ function minus() {
   currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
   currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
   currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+  
+  if (nowMonth === new Date().getMonth() + 1) {
+    currentDays.textContent = getCurrentDay();
+    currentDate.textContent = getCurrentDate();
+  };
 }
 
 btnRight.addEventListener('click', add)
