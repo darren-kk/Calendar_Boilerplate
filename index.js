@@ -5,6 +5,7 @@ const currentMonthElement = document.querySelector(".current_month_month");
 const currentYearElement = document.querySelector(".current_month_years");
 const datesRowElement = document.querySelectorAll(".calendar_main_dates")
 const tableElement = document.querySelector(".calendar_main")
+const calendarTableElement = document.querySelectorAll(".calendar_main_dates_tr")
 const btnRightElement = document.querySelector(".right");
 const btnleftElement = document.querySelector(".left");
 
@@ -145,13 +146,16 @@ function handleMinus() {
   };
 }
 
-function clickDate(event) {
+function handleDate(event) {
   if (event.target.textContent) {
     currentDayElement.textContent = weekdaysList[new Date(`${currentYear}-${currentMonth}-${event.target.textContent}`).getDay()];
     currentDateElement.textContent = new Date(`${currentYear}-${currentMonth}-${event.target.textContent}`).getDate();
   }
 }
 
+for (let i = 0; i < calendarTableElement.length; i++) {
+  calendarTableElement[i].addEventListener('click', handleDate);
+}
+
 btnRightElement.addEventListener('click', handleAdd);
 btnleftElement.addEventListener('click', handleMinus);
-tableElement.addEventListener('click', clickDate);
