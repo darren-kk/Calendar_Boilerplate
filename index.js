@@ -1,151 +1,157 @@
-const currentDays = document.querySelector(".current_date_days");
-const currentDate = document.querySelector(".current_date_date");
-const currentTime = document.querySelector(".current_date_time");
-const currentMonth = document.querySelector(".current_month_month");
-const currentyears = document.querySelector(".current_month_years");
-const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-const fullMonths = [1, 3, 5, 7, 8, 10, 12]
-const datesRow = document.querySelectorAll(".calendar_main_dates")
-const table = document.querySelector(".calendar_main")
-const btnRight = document.querySelector(".right");
-const btnleft = document.querySelector(".left");
-let nowMonth = new Date().getMonth() + 1
-let nowYear = getCurrentYear();
-let firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
+const currentDayElement = document.querySelector(".current_date_days");
+const currentDateElement = document.querySelector(".current_date_date");
+const currentTimeElement = document.querySelector(".current_date_time");
+const currentMonthElement = document.querySelector(".current_month_month");
+const currentYearElement = document.querySelector(".current_month_years");
+const datesRowElement = document.querySelectorAll(".calendar_main_dates")
+const tableElement = document.querySelector(".calendar_main")
+const btnRightElement = document.querySelector(".right");
+const btnleftElement = document.querySelector(".left");
+
+const weekdaysList = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const monthsList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+const fullMonthsList = [1, 3, 5, 7, 8, 10, 12]
+
+let currentMonth = new Date().getMonth() + 1
+let currentYear = getCurrentYear();
+let firstDay = new Date(`${currentYear}-${currentMonth}-1`).getDay();
 
 
-currentDays.textContent = getCurrentDay();
-currentDate.textContent = getCurrentDate();
-currentMonth.textContent = getCurrentMonth();
-currentyears.textContent = getCurrentYear();
+currentDayElement.textContent = getCurrentDay();
+currentDateElement.textContent = getCurrentDate();
+currentMonthElement.textContent = getCurrentMonth();
+currentYearElement.textContent = getCurrentYear();
+datesRowElement[firstDay].textContent = 1;
+
+fillCalendar();
 getCurrentTime();
 setInterval(getCurrentTime, 1000);
-datesRow[firstDay].textContent = 1;
-fillCalendar();
 
 
 function getCurrentTime() {
   let hours = new Date().getHours();
   let minutes = new Date().getMinutes();
   let seconds = new Date().getSeconds();
+
   if (hours < 10) {
     hours = `0${hours}`;
-  };
+  }
+  
   if (minutes < 10) {
     minutes = `0${minutes}`;
-  };
+  }
+  
   if (seconds < 10) {
     seconds = `0${seconds}`;
-  };
+  }
 
-  currentTime.textContent = `${hours} : ${minutes} : ${seconds}`;
-};
+  currentTimeElement.textContent = `${hours} : ${minutes} : ${seconds}`;
+}
 
 function getCurrentDate() {
   let result = new Date().getDate();
   return result;
-};
+}
 
 function getCurrentDay() {
   let currentDayNumber = new Date().getDay();
-  let result = weekdays[currentDayNumber];
+  let result = weekdaysList[currentDayNumber];
   return result;
-};
+}
 
 function getCurrentMonth() {
   let currentMonthNumber = new Date().getMonth();
-  let result = months[currentMonthNumber];
+  let result = monthsList[currentMonthNumber];
   return result;
-};
+}
 
 function getCurrentYear() {
   let result = new Date().getFullYear();
   return result;
-};
+}
 
 function fillCalendar() {
-  if (fullMonths.includes(nowMonth)) {
+  if (fullMonthsList.includes(currentMonth)) {
     for (let i = 2; i < 32; i++) {
-      firstDay = firstDay + 1
-      datesRow[firstDay].textContent = i
-    };
-  } else if (nowMonth === 2){
+      firstDay = firstDay + 1;
+      datesRowElement[firstDay].textContent = i;
+    }
+  } else if (currentMonth === 2){
     for (let i = 2; i < 29; i++) {
-      firstDay = firstDay + 1
-      datesRow[firstDay].textContent = i
-    }; 
+      firstDay = firstDay + 1;
+      datesRowElement[firstDay].textContent = i;
+    }
   } else {
     for (let i = 2; i < 31; i++) {
-      firstDay = firstDay + 1
-      datesRow[firstDay].textContent = i
-    };
-  };
+      firstDay = firstDay + 1;
+      datesRowElement[firstDay].textContent = i;
+    }
+  }
 }
 
-function add() {
-  for(let i = 0; i < datesRow.length; i ++) {
-    datesRow[i].textContent = "";
-  };
+function handleAdd() {
+  for(let i = 0; i < datesRowElement.length; i ++) {
+    datesRowElement[i].textContent = "";
+  }
   
-  nowMonth = nowMonth + 1
+  currentMonth = currentMonth + 1;
   
-  if (nowMonth > 12) {
-    nowYear = nowYear + 1;
-    nowMonth = 1;
-  };
+  if (currentMonth > 12) {
+    currentYear = currentYear + 1;
+    currentMonth = 1;
+  }
   
-  firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
-  datesRow[firstDay].textContent = 1;
+  firstDay = new Date(`${currentYear}-${currentMonth}-1`).getDay();
+  datesRowElement[firstDay].textContent = 1;
   
   fillCalendar();
   
-  currentMonth.textContent = months[new Date(`${nowYear}-${nowMonth}-1`).getMonth()];
-  currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
-  currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
-  currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+  currentMonthElement.textContent = monthsList[new Date(`${currentYear}-${currentMonth}-1`).getMonth()];
+  currentYearElement.textContent = new Date(`${currentYear}-${currentMonth}-1`).getFullYear();
+  currentDayElement.textContent = weekdaysList[new Date(`${currentYear}-${currentMonth}-1`).getDay()];
+  currentDateElement.textContent = new Date(`${currentYear}-${currentMonth}-1`).getDate();
   
-  if (nowMonth === new Date().getMonth() + 1) {
-    currentDays.textContent = getCurrentDay();
-    currentDate.textContent = getCurrentDate();
-  };
+  if (currentMonth === new Date().getMonth() + 1) {
+    currentDayElement.textContent = getCurrentDay();
+    currentDateElement.textContent = getCurrentDate();
+  }
 }
 
-function minus() {
-  for(let i = 0; i < datesRow.length; i ++) {
-    datesRow[i].textContent = "";
+function handleMinus() {
+  for(let i = 0; i < datesRowElement.length; i ++) {
+    datesRowElement[i].textContent = "";
   };
 
-  nowMonth = nowMonth - 1
+  currentMonth = currentMonth - 1
   
-  if (nowMonth < 1) {
-    nowYear = nowYear - 1;
-    nowMonth = 12;
+  if (currentMonth < 1) {
+    currentYear = currentYear - 1;
+    currentMonth = 12;
   };
   
-  firstDay = new Date(`${nowYear}-${nowMonth}-1`).getDay();
-  datesRow[firstDay].textContent = 1;
+  firstDay = new Date(`${currentYear}-${currentMonth}-1`).getDay();
+  datesRowElement[firstDay].textContent = 1;
   
   fillCalendar();
   
-  currentMonth.textContent = months[new Date(`${nowYear}-${nowMonth}-1`).getMonth()];
-  currentyears.textContent = new Date(`${nowYear}-${nowMonth}-1`).getFullYear();
-  currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-1`).getDay()];
-  currentDate.textContent = new Date(`${nowYear}-${nowMonth}-1`).getDate();
+  currentMonthElement.textContent = monthsList[new Date(`${currentYear}-${currentMonth}-1`).getMonth()];
+  currentYearElement.textContent = new Date(`${currentYear}-${currentMonth}-1`).getFullYear();
+  currentDayElement.textContent = weekdaysList[new Date(`${currentYear}-${currentMonth}-1`).getDay()];
+  currentDateElement.textContent = new Date(`${currentYear}-${currentMonth}-1`).getDate();
   
-  if (nowMonth === new Date().getMonth() + 1) {
-    currentDays.textContent = getCurrentDay();
-    currentDate.textContent = getCurrentDate();
+  if (currentMonth === new Date().getMonth() + 1) {
+    currentDayElement.textContent = getCurrentDay();
+    currentDateElement.textContent = getCurrentDate();
   };
 }
 
 function clickDate(event) {
   if (event.target.textContent) {
-    currentDays.textContent = weekdays[new Date(`${nowYear}-${nowMonth}-${event.target.textContent}`).getDay()];
-    currentDate.textContent = new Date(`${nowYear}-${nowMonth}-${event.target.textContent}`).getDate();
+    currentDayElement.textContent = weekdaysList[new Date(`${currentYear}-${currentMonth}-${event.target.textContent}`).getDay()];
+    currentDateElement.textContent = new Date(`${currentYear}-${currentMonth}-${event.target.textContent}`).getDate();
   }
 }
 
-btnRight.addEventListener('click', add);
-btnleft.addEventListener('click', minus);
-table.addEventListener('click', clickDate);
+btnRightElement.addEventListener('click', handleAdd);
+btnleftElement.addEventListener('click', handleMinus);
+tableElement.addEventListener('click', clickDate);
